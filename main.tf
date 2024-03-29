@@ -1,5 +1,5 @@
 resource "aws_instance" "my_ec2" {
-  ami           = "ami-0f403e3180720dd7e"
+  ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.demosubnet1.id
   vpc_security_group_ids = [ aws_security_group.example.id ]

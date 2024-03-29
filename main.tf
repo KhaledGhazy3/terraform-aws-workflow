@@ -3,7 +3,7 @@ resource "aws_instance" "my_ec2" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.demosubnet1.id
   vpc_security_group_ids = [ aws_security_group.example.id ]
-  key_name= "vockey"
+  key_name= "test_key"
 
   tags = {
     Name = "Python-App_EC2"

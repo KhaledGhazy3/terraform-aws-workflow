@@ -73,7 +73,7 @@ jobs:
      runs-on: ubuntu-latest
      outputs:
        eip: ${{ steps.khaled.outputs.ec2_address }}
-     needs: { build }
+     needs: [ build ]
      environment: ${{ github.event.inputs.environment }}
      env:
        TF_VAR_aws_region: ${{ vars.AWS_REGION }}

@@ -11,19 +11,44 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+  APP_PATH: 'my_package'
+
 jobs:
   buildt:
-    name: build
+    name: Deploy Application
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    
     env:
-      TF_VAR_aws_region: ${{ vars.AWS_REGION }}
+      PYTHON_VERSION: '3.x'
+      REQUIREMENTS_FILE: 'requirements.txt'
+
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v2
        
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
+      - name: Set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          
+      - name: Install dependencies
+        run: |
+          pip install -r ${{ env.REQUIREMENTS_FILE }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+           path: ~/.cache/pip
+           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+  
+
+
+
+
+
+
+    
       
       - name: Terraform Init
         run: terraform init

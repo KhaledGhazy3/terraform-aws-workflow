@@ -114,7 +114,7 @@ jobs:
           host: ${{ steps.khaled.outputs.ec2_address }}
           username: ec2-user
           port: 22
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_KEY_PATH }}
           source: artifacts/
           target: /home/ec2-user/app
 
